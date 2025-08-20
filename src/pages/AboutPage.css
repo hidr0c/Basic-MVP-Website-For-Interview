@@ -1,0 +1,222 @@
+.teachers-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.teachers-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.teachers-header h1 {
+  font-size: 2.5rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.teachers-header p {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 0.8;
+}
+
+.teachers-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  justify-content: center;
+  background-color: var(--bg-color);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.filter-group {
+  flex: 1;
+  min-width: 280px;
+}
+
+.filter-input,
+.filter-select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.filter-input:focus,
+.filter-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.teachers-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.teacher-card {
+  background-color: var(--bg-color);
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.teacher-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Teacher avatar */
+.teacher-avatar {
+  width: 220px;
+  position: relative;
+  padding: 1.5rem;
+}
+
+.teacher-avatar img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+}
+
+.country-flag {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Teacher info */
+.teacher-info {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.teacher-info h2 {
+  font-size: 1.6rem;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.teacher-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.stars {
+  color: #facc15;
+  letter-spacing: 2px;
+  margin-right: 0.5rem;
+}
+
+.rating-number {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.teacher-experience {
+  margin-bottom: 1.25rem;
+  color: var(--text-color);
+  opacity: 0.9;
+}
+
+.teacher-specialties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.specialty-tag {
+  background-color: #eef2ff;
+  color: #4f46e5;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.teacher-intro {
+  color: var(--text-color);
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.teacher-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.btn-view-profile,
+.btn-book-trial {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-view-profile {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid #d1d5db;
+}
+
+.btn-view-profile:hover {
+  background-color: #f9fafb;
+}
+
+.btn-book-trial {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-book-trial:hover {
+  background-color: #1d4ed8;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .teachers-header h1 {
+    font-size: 2rem;
+  }
+
+  .teacher-card {
+    flex-direction: column;
+  }
+
+  .teacher-avatar {
+    width: 100%;
+  }
+
+  .teacher-avatar img {
+    aspect-ratio: 16/9;
+    width: 100%;
+  }
+}
