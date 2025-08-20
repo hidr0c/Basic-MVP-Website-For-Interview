@@ -9,7 +9,26 @@ export default defineConfig({
       "/api": {
         target: "http://localhost:3000",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+      "/teachers": {
+        target: "http://localhost:3000/api",
+        changeOrigin: true,
+      },
+      "/lessons": {
+        target: "http://localhost:3000/api",
+        changeOrigin: true,
+      },
+      "/users": {
+        target: "http://localhost:3000/api",
+        changeOrigin: true,
+      },
+      "/packages": {
+        target: "http://localhost:3000/api",
+        changeOrigin: true,
+      },
+      "/purchases": {
+        target: "http://localhost:3000/api",
+        changeOrigin: true,
       },
     },
   },
