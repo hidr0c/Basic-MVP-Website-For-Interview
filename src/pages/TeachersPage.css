@@ -210,6 +210,10 @@
   border: none;
   cursor: pointer;
   transition: all 0.3s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-view-profile {
@@ -228,15 +232,19 @@
 }
 
 .btn-book-trial:hover {
-  background-color: #1d4ed8;
+  background-color: #1e40af;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .teachers-header h1 {
-    font-size: 2rem;
-  }
+.loading-indicator {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  opacity: 0.7;
+}
 
+/* Responsive */
+@media (max-width: 768px) {
   .teacher-card {
     flex-direction: column;
   }
@@ -246,7 +254,13 @@
   }
 
   .teacher-avatar img {
-    aspect-ratio: 16/9;
-    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .country-flag {
+    right: 50%;
+    transform: translateX(80px);
   }
 }

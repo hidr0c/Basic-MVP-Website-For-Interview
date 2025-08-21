@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './AboutPage.css';
+import './TeachersPage.css';
+import { Link } from 'react-router-dom';
 
 // Define the Teacher interface based on User schema and Teacher schema
 interface Teacher {
@@ -23,7 +24,7 @@ interface Teacher {
     introduction?: string;
 }
 
-const AboutPage: React.FC = () => {
+const TeachersPage: React.FC = () => {
     const [teachers, setTeachers] = useState<Teacher[]>([]);
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState("");
@@ -163,7 +164,7 @@ const AboutPage: React.FC = () => {
                     {filteredTeachers.map(teacher => (
                         <div key={teacher._id} className="teacher-card">
                             <div className="teacher-avatar">
-                                <img src={teacher.avatar || `https://avatars.dicebear.com/api/initials/${teacher.name || 'Teacher'}.svg`} alt={teacher.name || 'Teacher'} />
+                                <img src={teacher.avatar || `https://avatars.dicebear.com/api/avataaars/${teacher.name || 'Teacher'}.svg`} alt={teacher.name || 'Teacher'} />
                                 <span className="country-flag">{teacher.country || 'Global'}</span>
                             </div>
                             <div className="teacher-info">
@@ -190,7 +191,7 @@ const AboutPage: React.FC = () => {
                                     <span><strong>{teacher.languages?.join(', ') || 'English'}</strong></span>
                                 </div>
                                 <div className="teacher-actions">
-                                    <button className="btn-view-profile">Xem hồ sơ</button>
+                                    <Link to={`/teachers/${teacher._id}`} className="btn-view-profile">Xem hồ sơ</Link>
                                     <button className="btn-book-trial">Đặt học thử</button>
                                 </div>
                             </div>
@@ -202,4 +203,4 @@ const AboutPage: React.FC = () => {
     );
 };
 
-export default AboutPage;
+export default TeachersPage;

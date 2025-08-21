@@ -1,0 +1,372 @@
+.teacher-detail-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.breadcrumbs {
+  margin-bottom: 2rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
+.breadcrumbs a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.teacher-detail-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2.5rem;
+}
+
+/* Teacher Profile Styles */
+.teacher-profile {
+  background-color: var(--bg-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  border: 1px solid #e5e7eb;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  margin-right: 1.5rem;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--primary-color);
+}
+
+.profile-info h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.profile-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.country,
+.rating {
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.stars {
+  color: #facc15;
+  letter-spacing: 2px;
+  margin-right: 0.5rem;
+}
+
+.profile-highlights {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #f8fafc;
+  border-radius: 8px;
+}
+
+.highlight-item {
+  text-align: center;
+  flex: 1;
+}
+
+.highlight-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.highlight-label {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.profile-section {
+  margin-bottom: 2rem;
+}
+
+.profile-section h2 {
+  font-size: 1.25rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.profile-section p {
+  line-height: 1.7;
+  color: var(--text-color);
+  opacity: 0.9;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.specialty-tag,
+.language-tag {
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.specialty-tag {
+  background-color: #eef2ff;
+  color: #4f46e5;
+}
+
+.language-tag {
+  background-color: #f0fdf4;
+  color: #15803d;
+}
+
+.profile-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-list li {
+  padding: 0.5rem 0;
+  color: var(--text-color);
+  opacity: 0.9;
+}
+
+.profile-list li:before {
+  content: "• ";
+  color: var(--primary-color);
+}
+
+/* Booking Sidebar Styles */
+.booking-sidebar {
+  position: sticky;
+  top: 2rem;
+  align-self: start;
+}
+
+.booking-card {
+  background-color: var(--bg-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.booking-card h2 {
+  font-size: 1.25rem;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.booking-card > p {
+  color: var(--text-color);
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+}
+
+.booking-slots {
+  margin-bottom: 1.5rem;
+}
+
+.booking-slots h3 {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 0.75rem;
+}
+
+.slot-date-group {
+  margin-bottom: 1rem;
+}
+
+.slot-date {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.slot-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.slot-time {
+  background-color: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.slot-time:hover {
+  border-color: var(--primary-color);
+}
+
+.slot-time.selected {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.booking-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.price-label {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.price-value {
+  font-weight: 700;
+  color: #10b981;
+}
+
+.btn-book-lesson {
+  width: 100%;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-book-lesson:hover {
+  background-color: #1e40af;
+}
+
+.btn-book-lesson:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.booking-note {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+/* Loading & Error Styles */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  color: var(--text-color);
+}
+
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: var(--primary-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.error-container {
+  text-align: center;
+  padding: 3rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.error-container h2 {
+  color: #ef4444;
+  margin-bottom: 1rem;
+}
+
+.btn-back {
+  display: inline-block;
+  margin-top: 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-back:hover {
+  background-color: #1e40af;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .teacher-detail-container {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-sidebar {
+    position: static;
+    margin-top: 2rem;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-avatar {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .profile-meta {
+    justify-content: center;
+  }
+}

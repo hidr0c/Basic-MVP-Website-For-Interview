@@ -1,80 +1,31 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import Navbar from './components/Navbar'
-import HomePage from './pages/HomePage'
-import AboutPage from './pages/AboutPage'
-import ServicePage from './pages/ServicePage'
-import ContactPage from './pages/ContactPage'
+import { Routes, Route, Navigate } from 'react-router-dom';
+import './App.css';
+import Navbar from './components/Navbar';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ServicePage from './pages/ServicePage';
+import ContactPage from './pages/ContactPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import TeacherDetailPage from './pages/TeacherDetailPage';
+import TeachersPage from './pages/TeachersPage';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home')
-
-  // Navbar links configuration
-  const navLinks = [
-    { text: 'Trang chủ', url: '#home' },
-    { text: 'Giáo viên', url: '#about' },
-    { text: 'Khóa học', url: '#services' },
-    { text: 'Liên hệ', url: '#contact' }
-  ]
-
-  // Handle navigation
-  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    const href = e.currentTarget.getAttribute('href')
-    if (href) {
-      const page = href.replace('#', '')
-      setCurrentPage(page)
-      window.history.pushState({}, '', href)
-    }
-  }
-
-  // Check hash on load
-  useEffect(() => {
-    const hash = window.location.hash
-    if (hash) {
-      const page = hash.replace('#', '')
-      setCurrentPage(page)
-    }
-
-    // Handle browser back/forward
-    const handleHashChange = () => {
-      const hash = window.location.hash || '#home'
-      const page = hash.replace('#', '')
-      setCurrentPage(page)
-    }
-
-    window.addEventListener('hashchange', handleHashChange)
-    return () => window.removeEventListener('hashchange', handleHashChange)
-  }, [])
-
-  // Render the current page based on state
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'home':
-        return <HomePage />
-      case 'about':
-        return <AboutPage />
-      case 'services':
-        return <ServicePage />
-      case 'contact':
-        return <ContactPage />
-      default:
-        return <HomePage />
-    }
-  }
-
   return (
     <div className="app">
-      <Navbar
-        brand="EnglishOne"
-        links={navLinks.map(link => ({
-          ...link,
-          onClick: handleNavigation
-        }))}
-        currentPage={currentPage}
-      />
+      <Navbar />
       <main className="content">
-        {renderPage()}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/services" element={<ServicePage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/teachers" element={<TeachersPage />} />
+          <Route path="/teachers/:id" element={<TeacherDetailPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
       </main>
       <footer className="footer">
         <div className="container">
@@ -82,7 +33,7 @@ function App() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
