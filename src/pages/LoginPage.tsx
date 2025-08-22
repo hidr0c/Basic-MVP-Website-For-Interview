@@ -49,14 +49,14 @@ const LoginPage: React.FC = () => {
 
                 // Use Auth context to login with API data
                 login(data.user, data.token);
-                
+
                 // Redirect to home page
                 navigate('/');
                 return;
             } catch (apiError) {
                 console.error('API connection error:', apiError);
                 console.log('Using mock data for login...');
-                
+
                 // For development: Check if the credentials match our mock data
                 if (email === 'admin@englishhub.com' && password === 'admin') {
                     // Use mock data when API is down
