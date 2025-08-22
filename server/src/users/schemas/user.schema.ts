@@ -41,6 +41,13 @@ export class User extends Document {
 
 export const UserSchema = SchemaFactory.createForClass(User);
 
+// Add method to validate password
+UserSchema.methods.validatePassword = async function (
+  password: string,
+): Promise<boolean> {
+  return bcrypt.compare(password, this.password);
+};
+
 // Hash password before saving
 UserSchema.pre<User>('save', async function (next) {
   if (!this.isModified('password')) {

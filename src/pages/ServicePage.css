@@ -21,6 +21,28 @@
   max-width: 700px;
   margin: 0 auto;
   opacity: 0.8;
+  margin-bottom: 1.5rem;
+}
+
+.service-cta {
+  margin-top: 1.5rem;
+}
+
+.register-course-btn {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.register-course-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
 }
 
 .services-grid {

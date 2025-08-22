@@ -21,9 +21,8 @@ export class CreateUserDto {
   @MinLength(6)
   password: string;
 
-  @IsNotEmpty()
   @IsEnum(UserRole)
-  role: UserRole;
+  role?: UserRole;
 }
 
 export class LoginUserDto {
@@ -42,6 +41,9 @@ export class UpdateUserDto {
 
   @IsEmail()
   email?: string;
+
+  @IsEnum(UserRole)
+  role?: UserRole;
 }
 
 export class UserResponseDto {

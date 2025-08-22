@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './AuthPages.css';
+import { useAuth } from '../contexts/AuthContext';
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -8,6 +9,7 @@ const LoginPage: React.FC = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -31,9 +33,8 @@ const LoginPage: React.FC = () => {
 
             const data = await response.json();
 
-            // Store auth token in localStorage
-            localStorage.setItem('authToken', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
+            // Use Auth context to login
+            login(data.user, data.token);
 
             // Redirect to home page
             navigate('/');
@@ -92,18 +93,6 @@ const LoginPage: React.FC = () => {
                         {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
                     </button>
                 </form>
-
-                <div className="auth-social">
-                    <p>Hoặc đăng nhập với</p>
-                    <div className="social-buttons">
-                        <button className="social-button google">
-                            <i className="fab fa-google"></i> Google
-                        </button>
-                        <button className="social-button facebook">
-                            <i className="fab fa-facebook-f"></i> Facebook
-                        </button>
-                    </div>
-                </div>
 
                 <div className="auth-footer">
                     <p>

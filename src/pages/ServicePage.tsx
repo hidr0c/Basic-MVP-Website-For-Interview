@@ -64,6 +64,9 @@ const ServicePage: React.FC = () => {
             <div className="service-header">
                 <h1>Khám phá các khóa học</h1>
                 <p>Chọn lựa từ hàng trăm khóa học chất lượng cao của chúng tôi</p>
+                <div className="service-cta">
+                    <a href="/course-registration" className="register-course-btn">Đăng ký gói học ngay</a>
+                </div>
             </div>
 
             {loading ? (

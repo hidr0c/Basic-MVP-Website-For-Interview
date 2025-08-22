@@ -8,6 +8,7 @@ import { TeachersModule } from './teachers/teachers.module';
 import { LessonsModule } from './lessons/lessons.module';
 import { PackagesModule } from './packages/packages.module';
 import { PurchasesModule } from './purchases/purchases.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,6 +19,15 @@ import { PurchasesModule } from './purchases/purchases.module';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         uri: configService.get<string>('MONGODB_URI'),
+        connectionFactory: (connection) => {
+          connection.on('error', (error) => {
+            console.error('MongoDB connection error:', error);
+          });
+          connection.on('connected', () => {
+            console.log('MongoDB connected successfully');
+          });
+          return connection;
+        },
       }),
       inject: [ConfigService],
     }),
@@ -26,6 +36,7 @@ import { PurchasesModule } from './purchases/purchases.module';
     LessonsModule,
     PackagesModule,
     PurchasesModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

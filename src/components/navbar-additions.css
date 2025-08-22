@@ -1,0 +1,12 @@
+.dropdown-header {
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-divider {
+  margin-top: 1rem;
+}

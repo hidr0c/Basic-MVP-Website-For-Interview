@@ -1,33 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Navbar.css';
-
-interface User {
-    id: string;
-    name: string;
-    email: string;
-    role: string;
-}
+import { useAuth } from '../contexts/AuthContext';
 
 const Navbar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-    const [user, setUser] = useState<User | null>(null);
+    const { user, logout, isAuthenticated } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-
-    // Check if user is logged in on component mount
-    useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            try {
-                setUser(JSON.parse(storedUser));
-            } catch (error) {
-                console.error('Error parsing user from localStorage', error);
-                localStorage.removeItem('user');
-            }
-        }
-    }, []);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -38,10 +19,7 @@ const Navbar: React.FC = () => {
     };
 
     const handleLogout = () => {
-        // Clear auth data from localStorage
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('user');
-        setUser(null);
+        logout();
         setIsUserMenuOpen(false);
         navigate('/');
     };
@@ -58,7 +36,7 @@ const Navbar: React.FC = () => {
         <header className="navbar">
             <div className="navbar-container">
                 <Link to="/" className="navbar-brand">
-                    EnglishOne
+                    EnglishHub
                 </Link>
 
                 <button
@@ -87,7 +65,7 @@ const Navbar: React.FC = () => {
                     </ul>
 
                     <div className="nav-auth">
-                        {user ? (
+                        {isAuthenticated && user ? (
                             <div className="user-menu-container">
                                 <button
                                     className="user-menu-button"
@@ -120,19 +98,32 @@ const Navbar: React.FC = () => {
                                                     <i className="fas fa-user"></i> Hồ sơ cá nhân
                                                 </Link>
                                             </li>
-                                            {user.role === 'student' && (
-                                                <li>
-                                                    <Link to="/my-lessons" onClick={() => setIsUserMenuOpen(false)}>
-                                                        <i className="fas fa-book"></i> Bài học của tôi
-                                                    </Link>
-                                                </li>
-                                            )}
+                                            <li>
+                                                <Link to="/enrolled-courses" onClick={() => setIsUserMenuOpen(false)}>
+                                                    <i className="fas fa-book"></i> Khóa học đã đăng ký
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/payment-info" onClick={() => setIsUserMenuOpen(false)}>
+                                                    <i className="fas fa-credit-card"></i> Thông tin thanh toán
+                                                </Link>
+                                            </li>
                                             {user.role === 'teacher' && (
                                                 <li>
                                                     <Link to="/teaching-schedule" onClick={() => setIsUserMenuOpen(false)}>
                                                         <i className="fas fa-calendar"></i> Lịch dạy học
                                                     </Link>
                                                 </li>
+                                            )}
+                                            {user.role === 'admin' && (
+                                                <>
+                                                    <li className="dropdown-divider admin-divider"></li>
+                                                    <li>
+                                                        <Link to="/admin-dashboard" onClick={() => setIsUserMenuOpen(false)}>
+                                                            <i className="fas fa-tachometer-alt"></i> Quản trị website
+                                                        </Link>
+                                                    </li>
+                                                </>
                                             )}
                                             <li className="dropdown-divider"></li>
                                             <li>
