@@ -3,32 +3,6 @@ import './TeachersPage.css';
 import { Link } from 'react-router-dom';
 import TeacherQuiz from '../components/TeacherQuiz';
 
-// Define interfaces for user and teacher data
-interface User {
-    _id: string;
-    name: string;
-    email: string;
-    role: string;
-    createdAt: string;
-    updatedAt: string;
-}
-
-interface TeacherProfile {
-    _id: string;
-    userId: string;
-    bio: string;
-    experience: string;
-    languages: string[];
-    price: number;
-    rating: number;
-    totalStudents: number;
-    targets: string[];
-    isActive: boolean;
-    availableSlots: string[];
-    createdAt: string;
-    updatedAt: string;
-}
-
 // Combined interface for UI display
 interface Teacher {
     _id: string;       // Teacher profile ID
@@ -57,7 +31,6 @@ const TeachersPage: React.FC = () => {
     const [specialty, setSpecialty] = useState("");
     const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000000]);
     const [languageFilter, setLanguageFilter] = useState("");
-    const [experienceFilter, setExperienceFilter] = useState("");
     const [countryFilter, setCountryFilter] = useState("");
     const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -260,8 +233,6 @@ const TeachersPage: React.FC = () => {
     });
 
     // Display teachers - either recommended or filtered
-    const displayedTeachers = showRecommended ? recommendedTeachers : filteredTeachers;
-
     return (
         <div className="teachers-page">
             {isQuizOpen && (

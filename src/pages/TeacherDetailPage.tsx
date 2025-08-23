@@ -2,15 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './TeacherDetailPage.css';
 
-interface User {
-    _id: string;
-    name: string;
-    email: string;
-    role: string;
-    createdAt: string;
-    updatedAt: string;
-}
-
 interface Teacher {
     _id: string;
     userId: string;

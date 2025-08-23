@@ -100,8 +100,7 @@ const AdminPage: React.FC = () => {
     const [courses, setCourses] = useState<Course[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [, setCurrentPage] = useState(1);
 
     // Additional state for improved functionality
     const [userSearch, setUserSearch] = useState('');
@@ -111,13 +110,6 @@ const AdminPage: React.FC = () => {
 
     // New state for booking management
     const [bookings, setBookings] = useState<Booking[]>([]);
-    const [bookingSearch, setBookingSearch] = useState('');
-    const [bookingStatusFilter, setBookingStatusFilter] = useState('all');
-
-    // New state for modal
-    const [showModal, setShowModal] = useState(false);
-    const [modalType, setModalType] = useState<'user' | 'course' | 'teacher' | 'booking'>('user');
-    const [modalData, setModalData] = useState<any>(null);
 
     // New state for statistics
     const [stats, setStats] = useState<AdminStats>({
@@ -982,71 +974,6 @@ const AdminPage: React.FC = () => {
             </div>
         </div>
     );
-
-    // Pagination component
-    const Pagination = ({ totalItems, currentPage, onPageChange }: { totalItems: number, currentPage: number, onPageChange: (page: number) => void }) => {
-        const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-        return (
-            <div className="pagination">
-                <div className="page-info">
-                    Hiển thị {Math.min((currentPage - 1) * itemsPerPage + 1, totalItems)} - {Math.min(currentPage * itemsPerPage, totalItems)} / {totalItems} mục
-                </div>
-                <div className="page-buttons">
-                    <button
-                        className="page-btn"
-                        disabled={currentPage === 1}
-                        onClick={() => onPageChange(1)}
-                    >
-                        &laquo;
-                    </button>
-                    <button
-                        className="page-btn"
-                        disabled={currentPage === 1}
-                        onClick={() => onPageChange(currentPage - 1)}
-                    >
-                        &lsaquo;
-                    </button>
-
-                    {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                        let pageNum = currentPage;
-                        if (currentPage > 2 && totalPages > 5) {
-                            // Keep current page in the middle if possible
-                            pageNum = Math.min(Math.max(currentPage - 2, 1), totalPages - 4);
-                        } else {
-                            pageNum = 1;
-                        }
-                        pageNum = pageNum + i;
-
-                        return pageNum <= totalPages ? (
-                            <button
-                                key={pageNum}
-                                className={`page-btn ${pageNum === currentPage ? 'active' : ''}`}
-                                onClick={() => onPageChange(pageNum)}
-                            >
-                                {pageNum}
-                            </button>
-                        ) : null;
-                    })}
-
-                    <button
-                        className="page-btn"
-                        disabled={currentPage === totalPages}
-                        onClick={() => onPageChange(currentPage + 1)}
-                    >
-                        &rsaquo;
-                    </button>
-                    <button
-                        className="page-btn"
-                        disabled={currentPage === totalPages}
-                        onClick={() => onPageChange(totalPages)}
-                    >
-                        &raquo;
-                    </button>
-                </div>
-            </div>
-        );
-    };
 
     return (
         <div className="admin-page">
