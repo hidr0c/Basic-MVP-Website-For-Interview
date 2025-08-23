@@ -179,6 +179,7 @@
 
 .select-package-btn:hover {
   background-color: rgba(0, 123, 255, 0.08);
+  color: #333;
 }
 
 .select-package-btn.selected {
@@ -224,10 +225,12 @@
 
 .continue-btn:hover {
   background-color: #0056b3;
+  color: white;
 }
 
 .continue-btn:disabled {
   background-color: #b0b0b0;
+  color: white;
   cursor: not-allowed;
 }
 
@@ -392,6 +395,7 @@
 
 .back-btn:hover {
   background-color: #e9ecef;
+  color: #333;
 }
 
 .pay-now-btn {
@@ -407,6 +411,7 @@
 
 .pay-now-btn:hover {
   background-color: #218838;
+  color: white;
 }
 
 /* Confirmation styles */
@@ -481,6 +486,7 @@
 
 .goto-courses-btn:hover {
   background-color: #0056b3;
+  color: white;
 }
 
 /* Responsive styles */

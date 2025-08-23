@@ -78,13 +78,13 @@ const ServicePage: React.FC = () => {
                     {courses.map(course => (
                         <div key={course._id} className="service-card">
                             <div className="service-icon">
-                                <img src={`https://avatars.dicebear.com/api/initials/${course.title || 'Course'}.svg`} alt={course.title || 'Course'} />
+                                <img src={`https://avatars.dicebear.com/api/bottts/${course.title || 'Course'}.svg`} alt={course.title || 'Course'} />
                             </div>
                             <h2>{course.title || 'Khóa học'}</h2>
                             <p>{course.description || 'Thông tin chi tiết về khóa học sẽ được cập nhật sớm.'}</p>
                             <div className="course-details">
-                                <p><strong>Giáo viên:</strong> {course.teacher?.name || 'Chưa có thông tin'}</p>
-                                <p><strong>Giá:</strong> {course.price?.toLocaleString() || 0} VNĐ</p>
+                                <p key={`${course._id}-teacher`}><strong>Giáo viên:</strong> {course.teacher?.name || 'Chưa có thông tin'}</p>
+                                <p key={`${course._id}-price`}><strong>Giá:</strong> {course.price?.toLocaleString() || 0} VNĐ</p>
                             </div>
                             <a href="#" className="service-link">Xem chi tiết</a>
                         </div>

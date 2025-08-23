@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CourseRegistrationPage.css';
-import { useAuth } from '../contexts/AuthContext';
 import { simulateApiDelay } from '../utils/mockData';
 
 interface CoursePackage {

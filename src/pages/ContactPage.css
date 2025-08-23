@@ -81,6 +81,7 @@
 
 .submit-button:hover {
   background-color: #1e293b;
+  color: white;
 }
 
 .info-item {

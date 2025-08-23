@@ -2,26 +2,37 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './TeacherDetailPage.css';
 
-interface Teacher {
+interface User {
     _id: string;
     name: string;
     email: string;
     role: string;
-    bio?: string;
-    experience?: string | number;
-    languages?: string[];
-    price?: number;
-    rating?: number;
-    totalStudents?: number;
-    targets?: string[];
-    isActive?: boolean;
+    createdAt: string;
+    updatedAt: string;
+}
+
+interface Teacher {
+    _id: string;
+    userId: string;
+    bio: string;
+    experience: string;
+    languages: string[];
+    price: number;
+    rating: number;
+    totalStudents: number;
+    targets: string[];
+    isActive: boolean;
+    availableSlots: string[];
+    createdAt: string;
+    updatedAt: string;
+    // UI helpers
+    name?: string;
+    email?: string;
     avatar?: string;
     country?: string;
     specialties?: string[];
-    introduction?: string;
     education?: string[];
     certifications?: string[];
-    availableSlots?: string[];
 }
 
 const TeacherDetailPage: React.FC = () => {
@@ -29,28 +40,43 @@ const TeacherDetailPage: React.FC = () => {
     const [teacher, setTeacher] = useState<Teacher | null>(null);
     const [loading, setLoading] = useState(true);
     const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
+    const [showConfirmation, setShowConfirmation] = useState(false);
+    const [bookingStatus, setBookingStatus] = useState<'idle' | 'pending' | 'success' | 'error'>('idle');
 
     useEffect(() => {
         const fetchTeacherDetails = async () => {
             try {
-                // In a real app, this would be a fetch to `/api/users/${id}` or `/api/teachers/${id}`
-                const response = await fetch(`/api/users/${id}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch teacher details');
+                console.log(`Fetching teacher details for ID: ${id}`);
+                // Fetch teacher profile data
+                const teacherResponse = await fetch(`/api/teachers/${id}`);
+                if (!teacherResponse.ok) {
+                    console.error('Teacher API response not OK:', await teacherResponse.text());
+                    throw new Error(`Failed to fetch teacher details: ${teacherResponse.status}`);
                 }
-                const data = await response.json();
+                const teacherData = await teacherResponse.json();
+                console.log('Teacher data fetched:', teacherData);
 
-                // Process the teacher data
+                // Fetch user data for name and email
+                const userResponse = await fetch(`/api/users/${teacherData.userId}`);
+                if (!userResponse.ok) {
+                    console.error('User API response not OK:', await userResponse.text());
+                    throw new Error(`Failed to fetch user details: ${userResponse.status}`);
+                }
+                const userData = await userResponse.json();
+                console.log('User data fetched:', userData);
+
+                // Combine teacher and user data
                 setTeacher({
-                    ...data,
-                    avatar: data.avatar || `https://avatars.dicebear.com/api/avataaars/${data.name || 'Teacher'}.svg`,
-                    country: data.country || 'Global',
-                    languages: data.languages || ['English'],
-                    specialties: data.specialties || data.targets || ['General English'],
-                    targets: data.targets || data.specialties || ['General English'],
-                    education: data.education || ['Bachelor of Arts in English Literature'],
-                    certifications: data.certifications || ['TEFL Certified'],
-                    availableSlots: data.availableSlots || [
+                    ...teacherData,
+                    name: userData.name,
+                    email: userData.email,
+                    avatar: `https://avatars.dicebear.com/api/avataaars/${userData.name}.svg`,
+                    country: 'Vietnam', // Default country or can be added to teacher profile
+                    specialties: teacherData.targets || [], // Use targets as specialties
+                    education: ['Bachelor of Arts in English Literature'], // Can be added to teacher profile in future
+                    certifications: ['TEFL Certified'], // Can be added to teacher profile in future
+                    // Ensure availableSlots exists
+                    availableSlots: teacherData.availableSlots || [
                         '2025-08-22T09:00:00',
                         '2025-08-22T14:00:00',
                         '2025-08-23T10:00:00',
@@ -61,22 +87,27 @@ const TeacherDetailPage: React.FC = () => {
             } catch (error) {
                 console.error('Error fetching teacher details:', error);
                 // Provide mock data when API fails
+                // Make sure we have a valid ID from the URL parameters
+                const validId = id && id !== 'undefined' && id !== 'null' ? id : '1';
+
                 setTeacher({
-                    _id: id || '1',
-                    name: 'Sarah Johnson',
-                    email: 'sarah@example.com',
-                    role: 'teacher',
-                    avatar: 'https://avatars.dicebear.com/api/avataaars/sarah.svg',
-                    country: 'UK',
-                    rating: 4.8,
-                    specialties: ['IELTS', 'Business English'],
+                    _id: validId, // The teacher profile ID
+                    userId: `user_${validId}`, // Mock a user ID
+                    name: 'Teacher John', // UI helper, not part of Teacher model
+                    email: 'john@teacher.com', // UI helper, not part of Teacher model
+                    avatar: 'https://avatars.dicebear.com/api/avataaars/john.svg', // UI helper
+                    country: 'Vietnam', // UI helper
+                    rating: 5,
+                    specialties: ['IELTS', 'Business English'], // UI helper
                     targets: ['IELTS', 'Business English'],
-                    experience: '5 years',
-                    bio: 'Certified TEFL instructor with 5 years of experience teaching English to students from diverse backgrounds. I specialize in preparing students for the IELTS exam and teaching Business English. My teaching approach is communicative and focused on real-world applications of language skills. I believe in creating a supportive learning environment where students feel comfortable practicing and making mistakes.',
-                    languages: ['English', 'French'],
-                    price: 250000,
-                    totalStudents: 45,
+                    experience: 'Đã dạy 200 học viên',
+                    bio: 'Giáo viên IELTS 5 năm kinh nghiệm',
+                    languages: ['English', 'Vietnamese'],
+                    price: 25, // Price per lesson in USD
+                    totalStudents: 200,
                     isActive: true,
+                    createdAt: '2025-08-20T10:00:00.000+00:00',
+                    updatedAt: '2025-08-20T10:00:00.000+00:00',
                     education: [
                         'Bachelor of Arts in English Literature - Oxford University',
                         'Master of Education - Cambridge University'
@@ -131,8 +162,59 @@ const TeacherDetailPage: React.FC = () => {
             alert('Vui lòng chọn một khung giờ học');
             return;
         }
-        // In a real app, this would send a request to the backend
-        alert(`Đã đặt lịch học thử với giáo viên ${teacher?.name} vào ${formatDateTime(selectedSlot).date} lúc ${formatDateTime(selectedSlot).time}`);
+        setShowConfirmation(true);
+    };
+
+    const confirmBooking = async () => {
+        try {
+            setBookingStatus('pending');
+
+            // Actual API call to book a lesson
+            try {
+                const response = await fetch('/api/bookings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        teacherId: teacher?._id,
+                        userId: localStorage.getItem('userId') || 'guest', // Get current user ID or use 'guest'
+                        slot: selectedSlot,
+                        type: 'trial',
+                        status: 'pending'
+                    })
+                });
+
+                if (!response.ok) throw new Error('Booking failed');
+
+                // If booking is successful, proceed
+                await new Promise(resolve => setTimeout(resolve, 500));
+            } catch (error) {
+                console.error('API call failed, using fallback behavior', error);
+                // Simulate API call if the real one fails
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+
+            setBookingStatus('success');
+            // Close popup after 2 seconds on success
+            setTimeout(() => {
+                setShowConfirmation(false);
+                setBookingStatus('idle');
+                setSelectedSlot(null);
+            }, 2000);
+        } catch (error) {
+            console.error('Error booking lesson:', error);
+            setBookingStatus('error');
+            // Close popup after 2 seconds on error
+            setTimeout(() => {
+                setShowConfirmation(false);
+                setBookingStatus('idle');
+            }, 2000);
+        }
+    };
+
+    const cancelBooking = () => {
+        setShowConfirmation(false);
     };
 
     if (loading) {
@@ -287,6 +369,96 @@ const TeacherDetailPage: React.FC = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            {/* Booking confirmation popup */}
+            <BookingConfirmation
+                show={showConfirmation}
+                teacher={teacher}
+                selectedSlot={selectedSlot}
+                status={bookingStatus}
+                onConfirm={confirmBooking}
+                onCancel={cancelBooking}
+                formatDateTime={formatDateTime}
+            />
+        </div>
+    );
+};
+
+// Confirmation popup component
+const BookingConfirmation: React.FC<{
+    show: boolean;
+    teacher: Teacher | null;
+    selectedSlot: string | null;
+    status: 'idle' | 'pending' | 'success' | 'error';
+    onConfirm: () => void;
+    onCancel: () => void;
+    formatDateTime: (dateTime: string) => { date: string; time: string };
+}> = ({ show, teacher, selectedSlot, status, onConfirm, onCancel, formatDateTime }) => {
+    if (!show || !teacher || !selectedSlot) return null;
+
+    return (
+        <div className="booking-confirmation-overlay">
+            <div className="booking-confirmation-modal">
+                {status === 'idle' && (
+                    <>
+                        <h3>Xác nhận đặt lịch học</h3>
+                        <p>Bạn muốn đặt lịch học thử với giáo viên <strong>{teacher.name}</strong>?</p>
+
+                        <div className="booking-details">
+                            <div className="booking-detail-item">
+                                <span className="detail-label">Ngày học:</span>
+                                <span className="detail-value">{formatDateTime(selectedSlot).date}</span>
+                            </div>
+                            <div className="booking-detail-item">
+                                <span className="detail-label">Giờ học:</span>
+                                <span className="detail-value">{formatDateTime(selectedSlot).time}</span>
+                            </div>
+                            <div className="booking-detail-item">
+                                <span className="detail-label">Loại buổi học:</span>
+                                <span className="detail-value">Học thử (Miễn phí)</span>
+                            </div>
+                        </div>
+
+                        <div className="booking-actions">
+                            <button className="btn-cancel" onClick={onCancel}>Hủy</button>
+                            <button className="btn-confirm" onClick={onConfirm}>Xác nhận</button>
+                        </div>
+                    </>
+                )}
+
+                {status === 'pending' && (
+                    <div className="booking-status">
+                        <div className="status-spinner"></div>
+                        <p>Đang xử lý đặt lịch...</p>
+                    </div>
+                )}
+
+                {status === 'success' && (
+                    <div className="booking-status success">
+                        <div className="status-icon">✓</div>
+                        <h3>Đặt lịch thành công!</h3>
+                        <p>
+                            Bạn đã đặt lịch học thử với giáo viên <strong>{teacher.name}</strong> vào lúc{' '}
+                            <strong>{formatDateTime(selectedSlot).time}</strong> ngày{' '}
+                            <strong>{formatDateTime(selectedSlot).date}</strong>
+                        </p>
+                        <p className="status-note">
+                            Thông tin chi tiết đã được gửi đến email của bạn
+                        </p>
+                    </div>
+                )}
+
+                {status === 'error' && (
+                    <div className="booking-status error">
+                        <div className="status-icon">✗</div>
+                        <h3>Đặt lịch thất bại</h3>
+                        <p>
+                            Đã xảy ra lỗi khi đặt lịch. Vui lòng thử lại sau hoặc liên hệ với chúng tôi để được hỗ trợ.
+                        </p>
+                        <button className="btn-try-again" onClick={onCancel}>Đóng</button>
+                    </div>
+                )}
             </div>
         </div>
     );

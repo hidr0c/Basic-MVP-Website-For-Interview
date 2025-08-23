@@ -220,6 +220,7 @@
 
 .btn-view-profile:hover {
   background-color: #f9fafb;
+  color: var(--text-color);
 }
 
 .btn-book-trial {
@@ -229,6 +230,7 @@
 
 .btn-book-trial:hover {
   background-color: #1d4ed8;
+  color: white;
 }
 
 /* Responsive styles */

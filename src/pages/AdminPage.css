@@ -4,53 +4,53 @@
 }
 
 .admin-sidebar {
-  width: 250px;
-  background-color: #2c3e50;
-  color: white;
-  padding: 1rem 0;
-  flex-shrink: 0;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-}
-
-.sidebar-header {
-  padding: 0 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.sidebar-header h2 {
-  font-size: 1.5rem;
-  margin: 0;
-}
-
-.sidebar-nav {
+  width: 260px;
+  background-color: #1e293b;
+  color: #e2e8f0;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
 }
 
-.nav-item {
+.admin-sidebar-header {
+  margin-bottom: 2.5rem;
+}
+
+.admin-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.nav-link {
   display: flex;
   align-items: center;
-  padding: 1rem 1.5rem;
-  color: rgba(255, 255, 255, 0.8);
-  border: none;
-  background: none;
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 1rem;
+  padding: 0.8rem 1.2rem;
+  color: #94a3b8;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s;
+  font-weight: 500;
 }
 
-.nav-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
+.nav-link:hover {
+  background-color: #334155;
+  color: #fff;
 }
 
-.nav-item.active {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: white;
-  border-left: 4px solid #3498db;
+.nav-link.active {
+  background-color: #4f46e5;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3);
 }
 
 .nav-item i {
@@ -184,6 +184,10 @@
   color: #3498db;
   cursor: pointer;
   font-size: 0.9rem;
+}
+
+.view-all-btn:hover {
+  color: #2980b9;
 }
 
 .card-content {
@@ -364,6 +368,7 @@
 
 .add-new-btn:hover {
   background-color: #2980b9;
+  color: white;
 }
 
 .search-box {
@@ -403,10 +408,12 @@
   cursor: pointer;
   font-size: 0.95rem;
   transition: all 0.2s;
+  color: #555;
 }
 
 .filter-btn:hover {
   background-color: #f5f7fa;
+  color: #333;
 }
 
 .filter-btn.active {
@@ -428,6 +435,7 @@
   height: 36px;
   display: flex;
   align-items: center;
+  color: #555;
   justify-content: center;
   border: 1px solid #ddd;
   background-color: white;
@@ -439,6 +447,7 @@
 
 .page-btn:hover {
   background-color: #f5f7fa;
+  color: #333;
 }
 
 .page-btn.active {
@@ -511,6 +520,11 @@
   cursor: pointer;
 }
 
+.error-message button:hover {
+  background-color: #c62828;
+  color: white;
+}
+
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .admin-page {
@@ -551,4 +565,41 @@
   .search-box {
     width: 100%;
   }
+}
+
+/* No data state */
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+  color: #7f8c8d;
+}
+
+.no-data i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.no-data p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.reset-filter {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.reset-filter:hover {
+  background-color: #2980b9;
+  color: white;
 }

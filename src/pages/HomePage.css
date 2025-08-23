@@ -58,6 +58,7 @@
 
 .cta-button.primary:hover {
   background-color: #0369a1;
+  color: white;
   transform: translateY(-2px);
 }
 
@@ -69,6 +70,7 @@
 
 .cta-button.secondary:hover {
   background-color: #f0f9ff;
+  color: #0284c7;
   transform: translateY(-2px);
 }
 

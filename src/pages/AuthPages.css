@@ -133,10 +133,12 @@
 
 .auth-button:hover {
   background-color: #1e40af;
+  color: white;
 }
 
 .auth-button:disabled {
   background-color: #93c5fd;
+  color: #ffffff;
   cursor: not-allowed;
 }
 
