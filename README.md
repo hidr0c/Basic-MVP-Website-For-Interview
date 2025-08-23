@@ -1,5 +1,9 @@
 # Basic MVP Website For Interview
 
+Demo website
+---------------
+https://basic-mvp-website-for-interview.vercel.app/
+
 Project summary
 ---------------
 This repository is a small MVP (minimum viable product) for a teacher discovery and booking website. It contains a React + Vite frontend (TypeScript) and a sample backend in `server/` (NestJS). The app demonstrates listing teachers, filtering, a recommendation quiz, and a free trial booking modal.
@@ -73,12 +77,4 @@ Notes & assumptions
 - Price filtering UI controls only the upper bound (`priceRange[1]`) currently.
 - The README assumes typical npm scripts; open the `package.json` files if you want me to update commands exactly.
 
-Suggested next steps
---------------------
-- I can open `package.json` (root and `server/`) and update this README with exact scripts and ports.
-- I can run the frontend and backend locally and report any build/runtime errors.
-- Add API documentation section listing key endpoints and DTOs from `server/src`.
 
-Done
-----
-README.md updated at the repository root with English content, internship purpose note, and a thank-you to ChatGPT. If you want the README to include exact npm scripts or API docs, tell me and I'll update it now.
