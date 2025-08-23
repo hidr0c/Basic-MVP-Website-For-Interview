@@ -10,7 +10,7 @@ This repository is a small MVP (minimum viable product) for a teacher discovery 
 
 Purpose
 -------
-This project was created as part of an internship application (internship submission / portfolio). It demonstrates frontend UI, client-side filtering and a simple backend structure using NestJS.
+This project was created as part of an internship application (internship submission). It demonstrates frontend UI, client-side filtering and a simple backend structure using NestJS.
 
 Big thanks
 ----------
