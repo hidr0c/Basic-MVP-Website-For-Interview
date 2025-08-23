@@ -1,69 +1,84 @@
-# React + TypeScript + Vite
+# Basic MVP Website For Interview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Project summary
+---------------
+This repository is a small MVP (minimum viable product) for a teacher discovery and booking website. It contains a React + Vite frontend (TypeScript) and a sample backend in `server/` (NestJS). The app demonstrates listing teachers, filtering, a recommendation quiz, and a free trial booking modal.
 
-Currently, two official plugins are available:
+Purpose
+-------
+This project was created as part of an internship application (internship submission / portfolio). It demonstrates frontend UI, client-side filtering and a simple backend structure using NestJS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Big thanks
+----------
+Special thanks to ChatGPT for explaining the basics of NestJS and helping clarify backend concepts used in this project.
 
-## Expanding the ESLint configuration
+Key features
+------------
+- Teacher listing with avatar, rating, specialties, languages, country and price
+- Search and filters: name, specialty, language, country, and price range
+- Recommendation quiz (`TeacherQuiz` component) that suggests matching teachers
+- Modal booking flow to choose an available slot and confirm a free trial
+- Backend (NestJS) modules visible under `server/` for `auth`, `users`, `teachers`, `lessons`, `packages`, `purchases` (scaffolded controllers/services/DTOs)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+What I checked and completed (Checklist)
+----------------------------------------
+- [x] Reviewed project structure and key frontend files (React + Vite)
+- [x] Inspected `src/pages/TeachersPage.tsx` to understand filter, quiz and booking logic
+- [x] Noted backend structure under `server/` (NestJS modules and controllers)
+- [x] Created/updated this README with instructions, notes and checklist
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Repository layout (important files)
+----------------------------------
+- `index.html`, `vite.config.*`, `src/` — Frontend
+  - `src/main.tsx`, `src/App.tsx` — app entry
+  - `src/pages/TeachersPage.tsx` — main page for teacher listing, filters and booking
+  - `src/components/TeacherQuiz.tsx` — quiz component used to recommend teachers
+  - `src/components/*` — shared UI components and styles
+- `server/` — Backend (NestJS)
+  - `server/src/` — controllers, services, modules, DTOs and schemas
+- `demo-site/` — small static demo site (HTML/CSS/JS)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Run & install (Windows — cmd.exe)
+---------------------------------
+These commands assume you have Node.js and npm installed. Check the `package.json` files in root and `server/` for exact scripts.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1) Install frontend dependencies (root):
+
+```cmd
+cd C:\Users\Hidr0\Desktop\Basic-MVP-Website-For-Interview
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2) Run the frontend dev server (try `dev` script):
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```cmd
+npm run dev
 ```
+
+If there's no `dev` script, inspect `package.json` and use the correct script (for example `start`).
+
+3) (Optional) Run the backend NestJS server to serve the API endpoints referenced in the frontend (`/api/teachers`, `/api/users`):
+
+```cmd
+cd server
+npm install
+npm run start:dev
+```
+
+If `start:dev` is not present in `server/package.json`, use the script that starts the NestJS app (e.g. `start`, `dev`).
+
+Notes & assumptions
+-------------------
+- `TeachersPage.tsx` fetches `/api/teachers` and `/api/users` to combine profile and user data. Mock data is used if requests fail.
+- Price filtering UI controls only the upper bound (`priceRange[1]`) currently.
+- The README assumes typical npm scripts; open the `package.json` files if you want me to update commands exactly.
+
+Suggested next steps
+--------------------
+- I can open `package.json` (root and `server/`) and update this README with exact scripts and ports.
+- I can run the frontend and backend locally and report any build/runtime errors.
+- Add API documentation section listing key endpoints and DTOs from `server/src`.
+
+Done
+----
+README.md updated at the repository root with English content, internship purpose note, and a thank-you to ChatGPT. If you want the README to include exact npm scripts or API docs, tell me and I'll update it now.
